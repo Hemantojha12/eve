@@ -25,19 +25,19 @@ export function Layout({ children, showNav = true, className }: LayoutProps) {
     <div className="min-h-screen bg-background flex flex-col max-w-md mx-auto shadow-2xl overflow-hidden relative border-x border-border/40">
       <header className="flex items-center justify-between p-4 bg-background/80 backdrop-blur-md sticky top-0 z-50 border-b border-border/40">
         <Link href="/">
-          <a className="text-xl font-bold tracking-tighter text-primary hover:opacity-80 transition-opacity">
+          <div className="text-xl font-bold tracking-tighter text-primary hover:opacity-80 transition-opacity cursor-pointer">
             e-ventA
-          </a>
+          </div>
         </Link>
         <Link href="/profile">
-          <a className="hover-elevate active-elevate-2 transition-transform">
+          <div className="hover-elevate active-elevate-2 transition-transform cursor-pointer">
             <Avatar className="h-8 w-8 border border-border/50">
               <AvatarImage src={user?.profileImageUrl || undefined} />
               <AvatarFallback>
                 <User className="h-4 w-4 text-muted-foreground" />
               </AvatarFallback>
             </Avatar>
-          </a>
+          </div>
         </Link>
       </header>
 
