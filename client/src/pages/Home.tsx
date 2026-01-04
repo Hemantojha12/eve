@@ -5,10 +5,21 @@ import { Bell, Search } from "lucide-react";
 import { Link } from "wouter";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/hooks/use-auth";
+import { useState, useMemo } from "react";
+import { clsx } from "clsx";
+
+const CATEGORIES = ["All", "Music", "Art", "Food", "Tech", "Sports", "Business"];
 
 export default function Home() {
   const { data: events, isLoading } = useEvents();
   const { user } = useAuth();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredEvents = useMemo(() => {
+    if (!events) return [];
+    if (selectedCategory === "All") return events;
+    return events.filter(event => event.category === selectedCategory);
+  }, [events, selectedCategory]);
 
   return (
     <Layout className="bg-secondary/30">
@@ -41,10 +52,16 @@ export default function Home() {
             <button className="text-xs font-semibold text-primary hover:underline">See All</button>
           </div>
           <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2 -mx-6 px-6">
-            {["Music", "Art", "Food", "Tech", "Sports", "Business"].map((cat) => (
+            {CATEGORIES.map((cat) => (
               <button 
                 key={cat}
-                className="px-5 py-2.5 rounded-full bg-white border border-border/50 shadow-sm text-sm font-semibold whitespace-nowrap hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                onClick={() => setSelectedCategory(cat)}
+                className={clsx(
+                  "px-5 py-2.5 rounded-full border shadow-sm text-sm font-semibold whitespace-nowrap transition-all duration-300",
+                  selectedCategory === cat 
+                    ? "bg-primary text-white border-primary" 
+                    : "bg-white border-border/50 text-foreground hover:bg-primary/10 hover:border-primary/30"
+                )}
               >
                 {cat}
               </button>
@@ -55,7 +72,9 @@ export default function Home() {
         {/* Featured Section */}
         <section>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold font-display">Upcoming Events</h2>
+            <h2 className="text-lg font-bold font-display">
+              {selectedCategory === "All" ? "Upcoming Events" : `${selectedCategory} Events`}
+            </h2>
             <Link href="/search" className="text-xs font-semibold text-primary hover:underline">
               See All
             </Link>
@@ -72,12 +91,12 @@ export default function Home() {
                   </div>
                 </div>
               ))
-            ) : events?.length === 0 ? (
+            ) : filteredEvents.length === 0 ? (
               <div className="text-center py-10 bg-card rounded-3xl border border-dashed border-border">
-                <p className="text-muted-foreground">No upcoming events found.</p>
+                <p className="text-muted-foreground">No {selectedCategory.toLowerCase()} events found.</p>
               </div>
             ) : (
-              events?.map((event) => (
+              filteredEvents.map((event) => (
                 <EventCard key={event.id} event={event} />
               ))
             )}

@@ -10,6 +10,7 @@ export interface Event {
   imageUrl: string;
   price: number;
   totalSeats: number;
+  category: string;
   organizerId?: string | null;
 }
 
@@ -23,6 +24,7 @@ const MOCK_EVENTS: Event[] = [
     imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87",
     price: 29900,
     totalSeats: 500,
+    category: "Tech",
   },
   {
     id: 2,
@@ -33,6 +35,7 @@ const MOCK_EVENTS: Event[] = [
     imageUrl: "https://images.unsplash.com/photo-1459749411177-287ce371c015",
     price: 15000,
     totalSeats: 1000,
+    category: "Music",
   },
   {
     id: 3,
@@ -43,6 +46,7 @@ const MOCK_EVENTS: Event[] = [
     imageUrl: "https://images.unsplash.com/photo-1518998053901-5348d3969105",
     price: 0,
     totalSeats: 100,
+    category: "Art",
   },
 ];
 
