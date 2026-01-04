@@ -13,8 +13,8 @@ export default function Search() {
   const filteredEvents = events?.filter(event => {
     const matchesQuery = event.title.toLowerCase().includes(query.toLowerCase()) || 
                          event.location.toLowerCase().includes(query.toLowerCase());
-    // Mock category filtering since schema doesn't have category
-    return matchesQuery;
+    const matchesCategory = category === "All" || event.category === category;
+    return matchesQuery && matchesCategory;
   });
 
   return (
