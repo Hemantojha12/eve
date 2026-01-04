@@ -34,6 +34,24 @@ export default function Home() {
       </header>
 
       <div className="p-6 space-y-8">
+        {/* Categories Section (Moved below header/hero area) */}
+        <section>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold font-display">Categories</h2>
+            <button className="text-xs font-semibold text-primary hover:underline">See All</button>
+          </div>
+          <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2 -mx-6 px-6">
+            {["Music", "Art", "Food", "Tech", "Sports", "Business"].map((cat) => (
+              <button 
+                key={cat}
+                className="px-5 py-2.5 rounded-full bg-white border border-border/50 shadow-sm text-sm font-semibold whitespace-nowrap hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </section>
+
         {/* Featured Section */}
         <section>
           <div className="flex items-center justify-between mb-4">
@@ -63,21 +81,6 @@ export default function Home() {
                 <EventCard key={event.id} event={event} />
               ))
             )}
-          </div>
-        </section>
-        
-        {/* Categories Section (Static for now) */}
-        <section>
-          <h2 className="text-lg font-bold font-display mb-4">Categories</h2>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2 -mx-6 px-6">
-            {["Music", "Art", "Food", "Tech", "Sports", "Business"].map((cat) => (
-              <button 
-                key={cat}
-                className="px-5 py-2.5 rounded-full bg-white border border-border/50 shadow-sm text-sm font-semibold whitespace-nowrap hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
-              >
-                {cat}
-              </button>
-            ))}
           </div>
         </section>
       </div>
