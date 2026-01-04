@@ -14,7 +14,8 @@ export default function Auth() {
   }, [user, setLocation]);
 
   const handleLogin = () => {
-    window.location.href = "/api/login";
+    // Mock login for frontend-only mode
+    window.location.href = "/";
   };
 
   return (

@@ -19,7 +19,6 @@ export function Layout({ children, showNav = true, className }: LayoutProps) {
   
   // Don't show nav on auth pages or event details
   const shouldHideNav = !showNav || location === "/auth";
-  const isEventDetails = location.startsWith("/event/");
 
   return (
     <div className="min-h-screen bg-background flex flex-col max-w-md mx-auto shadow-2xl overflow-hidden relative border-x border-border/40">

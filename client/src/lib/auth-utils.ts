@@ -1,17 +1,10 @@
+// Simplified auth utils for frontend-only mode
 export function isUnauthorizedError(error: Error): boolean {
-  return /^401: .*Unauthorized/.test(error.message);
+  return error.message.includes("401") || error.message.includes("Unauthorized");
 }
 
-// Redirect to login with a toast notification
-export function redirectToLogin(toast?: (options: { title: string; description: string; variant: string }) => void) {
-  if (toast) {
-    toast({
-      title: "Unauthorized",
-      description: "You are logged out. Logging in again...",
-      variant: "destructive",
-    });
-  }
-  setTimeout(() => {
-    window.location.href = "/api/login";
-  }, 500);
+export function redirectToLogin() {
+  // In a frontend-only app, this might redirect to a specific login page
+  // or show a login modal. For now, we'll just log it.
+  console.log("Redirecting to login...");
 }
